@@ -1,5 +1,5 @@
 import './styles/index.scss'
-import React from 'react'
+import React, { StrictMode } from 'react'
 import { render } from 'react-dom'
 import { ApolloProvider } from '@apollo/client'
 
@@ -8,7 +8,9 @@ import App from './views/App'
 
 render(
   <ApolloProvider client={client}>
-    <App />
+    <StrictMode>
+      <App />
+    </StrictMode>
   </ApolloProvider>,
   document.getElementById('root')
 )

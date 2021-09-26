@@ -1,5 +1,6 @@
 import './styles.scss'
-import React, { FunctionComponent, useState, useEffect } from 'react'
+import { Country, CountryData, Languages, Params } from '../../types'
+import React, { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { useLazyQuery } from '@apollo/client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,37 +9,13 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { COUNTRY_QUERY } from '../../api/countries'
 import Spinner from '../../components/Spinner'
 
-interface Params {
-  countryCode: string;
-}
-
-interface Country {
-  code: string;
-  name: string;
-  currency: string;
-  continent: {
-    code: string
-    name: string
-  };
-  languages: {
-    code: string;
-    name: string;
-  };
-  capital: string;
-  emoji: string;
-}
-
-interface CountryData {
-  country: Country[];
-}
-
-const Details: FunctionComponent = () => {
+const Details = () => {
   const { countryCode }: Params = useParams()
   const { goBack } = useHistory()
   const [getCountry, { loading, error, data }] = useLazyQuery<CountryData>(COUNTRY_QUERY, {
     variables: { countryCode }
   })
-  const [country, setCountry] = useState({})
+  const [country, setCountry] = useState<Country>({} as Country)
 
   useEffect(() => {
     if (countryCode) getCountry()
@@ -48,15 +25,12 @@ const Details: FunctionComponent = () => {
     if (data) setCountry(data.country)
   }, [data])
 
-  const getLanguages = (languages) => {
-    const languagesList = Array.from(languages, language => `${language.name} (${language.code})`)
-    return languagesList.join(', ')
-  }
-
   if (loading) return <Spinner />
   if (error) return <p className='error-message'>Information not available</p>
 
   if (Object.keys(country).length) {
+    const languagesList = Array.from(country.languages, (language: Languages) => `${language.name} (${language.code})`).join(', ')
+
     return (
       <div className='details'>
         <div className='container'>
@@ -88,7 +62,7 @@ const Details: FunctionComponent = () => {
                 </li>
                 <li>
                   <strong>Languages</strong>
-                  <p>{getLanguages(country.languages)}</p>
+                  <p>{languagesList}</p>
                 </li>
                 <li>
                   <strong>Capital</strong>

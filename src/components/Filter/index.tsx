@@ -1,9 +1,16 @@
 import './styles.scss'
+import { Option } from '../../types'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
-const Filter = ({ options, value, onChange }) => {
+type FilterProps = {
+  options: Option[]
+  value: string
+  onChange: (value: string) => void
+}
+
+const Filter = ({ options, value, onChange }: FilterProps) => {
 
   return (
     <div className='filter'>
@@ -13,7 +20,7 @@ const Filter = ({ options, value, onChange }) => {
         </div>
       ) : null}
       <select className='filter__list' value={value} onChange={event => onChange(event.target.value)}>
-        {options.map((option, index) => (
+        {options.map((option, index: number) => (
           <option
             key={index}
             hidden={option.value.length ? false : true}

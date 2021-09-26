@@ -1,8 +1,13 @@
 import './styles.scss'
+import { Country } from '../../types'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 
-const CountryCard = ({ country }) => {
+type CountryCardProps = {
+  country: Country
+}
+
+const CountryCard = ({ country }: CountryCardProps) => {
   const { push } = useHistory()
 
   const handleCountryInfo = () => push(`/${country.code}`)

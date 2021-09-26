@@ -5,6 +5,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
 const config: Configuration = {
   mode: 'development',
+  devtool: 'source-map',
   entry: {
     app: './src/index.tsx',
     hot: 'webpack/hot/dev-server.js',

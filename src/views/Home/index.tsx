@@ -1,5 +1,6 @@
 import './styles.scss'
-import React, { FunctionComponent, useState, useEffect } from 'react'
+import { Country, CountriesData } from '../../types'
+import React, { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 
 import { ALL_COUNTRIES_QUERY } from '../../api/countries'
@@ -8,24 +9,9 @@ import SearchBar from '../../components/SearchBar'
 import Filter from '../../components/Filter'
 import CountryCard from '../../components/CountryCard'
 
-interface Country {
-  code: string;
-  name: string;
-  currency: string;
-  continent: {
-    code: string
-    name: string
-  };
-  emoji: string;
-}
-
-interface CountryData {
-  countries: Country[];
-}
-
-const Home: FunctionComponent = () => {
-  const { loading, error, data } = useQuery<CountryData>(ALL_COUNTRIES_QUERY)
-  const [countries, setCountries] = useState([])
+const Home = () => {
+  const { loading, error, data } = useQuery<CountriesData>(ALL_COUNTRIES_QUERY)
+  const [countries, setCountries] = useState<Country[]>([])
   const [filterValues, setFilterValues] = useState({ name: '', continent: '', currency: '' })
 
   useEffect(() => {
@@ -40,7 +26,7 @@ const Home: FunctionComponent = () => {
   }, [data, filterValues])
 
   const continentOptions = () => {
-    const continents: { value: string, name: string }[] = [
+    const continents = [
       { value: '', name: 'Filter by continent' }
     ]
 
@@ -61,7 +47,7 @@ const Home: FunctionComponent = () => {
   }
 
   const currencyOptions = () => {
-    const currencies: { value: string, name: string }[] = [
+    const currencies = [
       { value: '', name: 'Filter by currency' }
     ]
 
@@ -85,7 +71,7 @@ const Home: FunctionComponent = () => {
     return currencies
   }
 
-  const onChange = (value: any, type: string) => {
+  const onChange = (value: string, type: string) => {
     switch (type) {
       case 'name':
         return setFilterValues(state => ({ ...state, name: value }))
@@ -105,10 +91,10 @@ const Home: FunctionComponent = () => {
     <div className='home'>
       <div className='container'>
         <h1 className='title'>World countries</h1>
-        <SearchBar value={filterValues.name} onChange={(value: string) => onChange(value, 'name')} />
+        <SearchBar value={filterValues.name} onChange={value => onChange(value, 'name')} />
         <div className='filters'>
-          <Filter options={continentOptions()} value={filterValues.continent} onChange={(value: string) => onChange(value, 'continent')} />
-          <Filter options={currencyOptions()} value={filterValues.currency} onChange={(value: string) => onChange(value, 'currency')} />
+          <Filter options={continentOptions()} value={filterValues.continent} onChange={value => onChange(value, 'continent')} />
+          <Filter options={currencyOptions()} value={filterValues.currency} onChange={value => onChange(value, 'currency')} />
         </div>
         <div className='countries'>
           {countries.map((country, index) => (
