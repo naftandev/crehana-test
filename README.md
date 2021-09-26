@@ -1,9 +1,9 @@
-# Webpack config for React
-A basic Webpack configuration for React proyects.
+# Crehana Test
+Crehana Frontend Test
 
 ### Run project
 ```
-cd webpack-react
+cd crehana-test
 npm i
 npm start
 ```
@@ -12,24 +12,3 @@ npm start
 ```
 npm run build
 ```
-
-### Dependencies
-- react
-- react-dom
-- webpack
-- webpack-cli
-- webpack-dev-server
-- @babel/core
-- @babel/preset-env
-- @babel/preset-react
-- babel-loader
-- css-loader
-- css-minimizer-webpack-plugin
-- mini-css-extract-plugin
-- sass
-- sass-loader
-- html-loader
-- html-webpack-plugin
-- clean-webpack-plugin
-
-#### _Any feedback is welcome_

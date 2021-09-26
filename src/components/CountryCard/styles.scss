@@ -1,0 +1,33 @@
+@import '../../styles/variables';
+
+.country-card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  border-radius: $card-radius;
+  background-color: $secondary-color;
+  box-shadow: $card-shadow;
+  overflow: hidden;
+  user-select: none;
+  &__flag,
+  &__name {
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  &__flag {
+    background-color: $variant-color;
+    span {
+      width: 100%;
+      font-size: 3rem;
+    }
+  }
+  &__name {
+    width: 100%;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}

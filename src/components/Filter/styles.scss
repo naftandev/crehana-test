@@ -1,0 +1,34 @@
+@import '../../styles/variables';
+
+.filter {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: auto;
+
+  &__list {
+    width: 150px;
+    border: transparent;
+    border-radius: 18.5px;
+    padding: 10px;
+    color: $light-color;
+    background-color: $secondary-color;
+    outline: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__reset {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba($color: $warning-color, $alpha: $opacity);
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

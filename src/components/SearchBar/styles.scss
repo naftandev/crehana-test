@@ -1,0 +1,26 @@
+@import '../../styles/variables';
+
+.search-bar {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  margin: 30px auto 20px;
+  border-radius: 22px;
+  padding: 10px 20px 10px 15px;
+  background-color: $variant-color;
+  input {
+    width: 100%;
+    border: transparent;
+    padding: 0 15px;
+    color: $light-color;
+    background-color: transparent;
+    outline: none;
+    &::placeholder {
+      color: $light-color;
+      opacity: $opacity;
+    }
+  }
+  &__clear:hover {
+    cursor: pointer;
+  }
+}
