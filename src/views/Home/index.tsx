@@ -1,9 +1,12 @@
 import './styles.scss'
-import { Country, CountriesData } from '../../types'
-import React, { useState, useEffect } from 'react'
+import { Country, CountriesData } from '../../interfaces'
+import React, { useState, useEffect, useContext } from 'react'
 import { useQuery } from '@apollo/client'
 
 import { ALL_COUNTRIES_QUERY } from '../../api/countries'
+import { Context } from '../../context'
+import { filterBySearch, filterByContinent, filterByCurrency } from '../../actions'
+
 import Spinner from '../../components/Spinner'
 import SearchBar from '../../components/SearchBar'
 import Filter from '../../components/Filter'
@@ -12,7 +15,8 @@ import CountryCard from '../../components/CountryCard'
 const Home = () => {
   const { loading, error, data } = useQuery<CountriesData>(ALL_COUNTRIES_QUERY)
   const [countries, setCountries] = useState<Country[]>([])
-  const [filterValues, setFilterValues] = useState({ name: '', continent: '', currency: '' })
+  const { state, dispatch } = useContext(Context)
+  const { filterValues } = state
 
   useEffect(() => {
     if (data) {
@@ -74,11 +78,11 @@ const Home = () => {
   const onChange = (value: string, type: string) => {
     switch (type) {
       case 'name':
-        return setFilterValues(state => ({ ...state, name: value }))
+        return dispatch(filterBySearch(value))
       case 'continent':
-        return setFilterValues(state => ({ ...state, continent: value }))
+        return dispatch(filterByContinent(value))
       case 'currency':
-        return setFilterValues(state => ({ ...state, currency: value }))
+        return dispatch(filterByCurrency(value))
       default:
         return
     }

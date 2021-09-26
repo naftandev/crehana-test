@@ -1,5 +1,5 @@
 import './styles.scss'
-import { Country, CountryData, Languages, Params } from '../../types'
+import { Country, CountryData, Languages, Params } from '../../interfaces'
 import React, { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { useLazyQuery } from '@apollo/client'

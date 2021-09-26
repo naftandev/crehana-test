@@ -36,3 +36,25 @@ export interface Option {
 export interface Params {
   countryCode: string;
 }
+
+export interface State {
+  filterValues: {
+    name: string;
+    continent: string;
+    currency: string;
+  }
+}
+
+export interface Action {
+  type: string;
+  payload: string;
+}
+
+export interface Context {
+  state: State;
+  dispatch: (value: Action) => void;
+}
+
+export interface ContextProvider {
+  children: JSX.Element | JSX.Element[];
+}

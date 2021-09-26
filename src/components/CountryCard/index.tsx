@@ -1,5 +1,5 @@
 import './styles.scss'
-import { Country } from '../../types'
+import { Country } from '../../interfaces'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 
